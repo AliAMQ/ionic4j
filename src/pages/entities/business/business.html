@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Businesses</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="open()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<!-- todo: add elasticsearch support -->
+<ion-content padding>
+    <ion-refresher (ionRefresh)="loadAll($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let business of businesses; trackBy: trackId" #slidingItem>
+            <button ion-item (click)="detail(business)">
+                <h2>{{business.title}}</h2>
+                <p>{{business.description}}</p>
+                <!-- todo: special handling for translating enum - {{'State.' + business.state}}" -->
+                <p>{{business.state}}</p>
+                <p>{{business.address}}</p>
+                <p>{{business.phone}}</p>
+                <p>{{business.rate}}</p>
+                <p>{{business.since | date:'mediumDate'}}</p>
+                <p>{{business.link}}</p>
+                <p>{{business.reservation}}</p>
+                <p>{{business.delivery}}</p>
+                <p>{{business.wifi}}</p>
+                <ion-avatar *ngIf="business.image">
+                    <img [src]="'data:' + business.imageContentType + ';base64,' + business.image" />
+                    <p *ngIf="business.image">{{business.imageContentType}}, {{byteSize(business.image)}}</p>
+                </ion-avatar>
+                <p>{{business.video}}</p>
+                <p>{{business.paid}}</p>
+                <p>{{business.imagepath}}</p>
+                <p>{{business.videopath}}</p>
+            </button>
+            <ion-item-options>
+                <button ion-button color="primary" (click)="open(slidingItem, business)">
+                    {{ 'EDIT_BUTTON' | translate }}
+                </button>
+                <button ion-button color="danger" (click)="delete(business)">
+                    {{ 'DELETE_BUTTON' | translate }}
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <ion-item *ngIf="!businesses?.length">
+        No Businesses found.
+    </ion-item>
+</ion-content>

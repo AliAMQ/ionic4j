@@ -1,0 +1,121 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Business</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label fixed>Title</ion-label>
+            <div item-content>
+                <span>{{business.title}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Description</ion-label>
+            <div item-content>
+                <span>{{business.description}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>State</ion-label>
+            <div item-content>
+                <span>{{business.state}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Address</ion-label>
+            <div item-content>
+                <span>{{business.address}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Phone</ion-label>
+            <div item-content>
+                <span>{{business.phone}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Rate</ion-label>
+            <div item-content>
+                <span>{{business.rate}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Since</ion-label>
+            <div item-content>
+                <span>{{business.since | date:'mediumDate'}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Link</ion-label>
+            <div item-content>
+                <span>{{business.link}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Reservation</ion-label>
+            <div item-content>
+                <span>{{business.reservation}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Delivery</ion-label>
+            <div item-content>
+                <span>{{business.delivery}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Wifi</ion-label>
+            <div item-content>
+                <span>{{business.wifi}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Image</ion-label>
+            <div item-content>
+                <div *ngIf="business.image">
+                    <a (click)="openFile(business.imageContentType, business.image)">
+                        <img [src]="'data:' + business.imageContentType + ';base64,' + business.image" style="max-width: 100%;" alt="business image"/>
+                    </a>
+                    {{business.imageContentType}}, {{byteSize(business.image)}}
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Video</ion-label>
+            <div item-content>
+                <div *ngIf="business.video">
+                    <a (click)="openFile(business.videoContentType, business.video)" jhiTranslate="entity.action.open">open</a>
+                    {{business.videoContentType}}, {{byteSize(business.video)}}
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Paid</ion-label>
+            <div item-content>
+                <span>{{business.paid}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Imagepath</ion-label>
+            <div item-content>
+                <span>{{business.imagepath}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Videopath</ion-label>
+            <div item-content>
+                <span>{{business.videopath}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label>User Profile</ion-label>
+            <div item-content *ngIf="business.userProfileId">
+                <a>{{business.userProfileId}}</a>
+            </div>
+        </ion-item>
+    </ion-list>
+
+    <button ion-button block (click)="open(business)">{{ 'EDIT_BUTTON' | translate }}</button>
+</ion-content>

@@ -1,0 +1,85 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Review</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label fixed>Title</ion-label>
+            <div item-content>
+                <span>{{review.title}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Description</ion-label>
+            <div item-content>
+                <span>{{review.description}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Like</ion-label>
+            <div item-content>
+                <span>{{review.like}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Dislike</ion-label>
+            <div item-content>
+                <span>{{review.dislike}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Date</ion-label>
+            <div item-content>
+                <span>{{review.date | date:'mediumDate'}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Image</ion-label>
+            <div item-content>
+                <div *ngIf="review.image">
+                    <a (click)="openFile(review.imageContentType, review.image)">
+                        <img [src]="'data:' + review.imageContentType + ';base64,' + review.image" style="max-width: 100%;" alt="review image"/>
+                    </a>
+                    {{review.imageContentType}}, {{byteSize(review.image)}}
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Video</ion-label>
+            <div item-content>
+                <div *ngIf="review.video">
+                    <a (click)="openFile(review.videoContentType, review.video)" jhiTranslate="entity.action.open">open</a>
+                    {{review.videoContentType}}, {{byteSize(review.video)}}
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Imagepath</ion-label>
+            <div item-content>
+                <span>{{review.imagepath}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Videopath</ion-label>
+            <div item-content>
+                <span>{{review.videopath}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label>User Profile</ion-label>
+            <div item-content *ngIf="review.userProfileId">
+                <a>{{review.userProfileId}}</a>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Business</ion-label>
+            <div item-content *ngIf="review.businessId">
+                <a>{{review.businessId}}</a>
+            </div>
+        </ion-item>
+    </ion-list>
+
+    <button ion-button block (click)="open(review)">{{ 'EDIT_BUTTON' | translate }}</button>
+</ion-content>

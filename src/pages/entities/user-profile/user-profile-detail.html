@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>User Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label fixed>State</ion-label>
+            <div item-content>
+                <span>{{userProfile.state}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>City</ion-label>
+            <div item-content>
+                <span>{{userProfile.city}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Address</ion-label>
+            <div item-content>
+                <span>{{userProfile.address}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Phone</ion-label>
+            <div item-content>
+                <span>{{userProfile.phone}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Image</ion-label>
+            <div item-content>
+                <div *ngIf="userProfile.image">
+                    <a (click)="openFile(userProfile.imageContentType, userProfile.image)">
+                        <img [src]="'data:' + userProfile.imageContentType + ';base64,' + userProfile.image" style="max-width: 100%;" alt="userProfile image"/>
+                    </a>
+                    {{userProfile.imageContentType}}, {{byteSize(userProfile.image)}}
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Since</ion-label>
+            <div item-content>
+                <span>{{userProfile.since | date:'mediumDate'}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Owner</ion-label>
+            <div item-content>
+                <span>{{userProfile.owner}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Imagepath</ion-label>
+            <div item-content>
+                <span>{{userProfile.imagepath}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label>User</ion-label>
+            <div item-content>{{userProfile.userId}}</div>
+        </ion-item>
+    </ion-list>
+
+    <button ion-button block (click)="open(userProfile)">{{ 'EDIT_BUTTON' | translate }}</button>
+</ion-content>

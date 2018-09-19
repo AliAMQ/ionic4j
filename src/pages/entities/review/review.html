@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Reviews</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="open()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<!-- todo: add elasticsearch support -->
+<ion-content padding>
+    <ion-refresher (ionRefresh)="loadAll($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let review of reviews; trackBy: trackId" #slidingItem>
+            <button ion-item (click)="detail(review)">
+                <h2>{{review.title}}</h2>
+                <p>{{review.description}}</p>
+                <p>{{review.like}}</p>
+                <p>{{review.dislike}}</p>
+                <p>{{review.date | date:'mediumDate'}}</p>
+                <ion-avatar *ngIf="review.image">
+                    <img [src]="'data:' + review.imageContentType + ';base64,' + review.image" />
+                    <p *ngIf="review.image">{{review.imageContentType}}, {{byteSize(review.image)}}</p>
+                </ion-avatar>
+                <p>{{review.video}}</p>
+                <p>{{review.imagepath}}</p>
+                <p>{{review.videopath}}</p>
+            </button>
+            <ion-item-options>
+                <button ion-button color="primary" (click)="open(slidingItem, review)">
+                    {{ 'EDIT_BUTTON' | translate }}
+                </button>
+                <button ion-button color="danger" (click)="delete(review)">
+                    {{ 'DELETE_BUTTON' | translate }}
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <ion-item *ngIf="!reviews?.length">
+        No Reviews found.
+    </ion-item>
+</ion-content>
